@@ -16,6 +16,10 @@ sealed class RemoteApi {
       throw RandomChanceException();
     }
 
+    if (page > 5) {
+      return Future.value([]);
+    }
+
     return Future.delayed(
       const Duration(seconds: 0),
       () => http.get(_ApiUrlBuilder.photos(page, limit, search), headers: {
